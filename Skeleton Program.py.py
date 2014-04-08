@@ -79,7 +79,7 @@ def DisplayMenu():
 def GetMenuChoice():
   Choice = input()
   print()
-  return Choice
+  return Choice.capitalize()
 
 def LoadDeck(Deck):
   CurrentFile = open('deck.txt', 'r')
@@ -218,7 +218,7 @@ if __name__ == '__main__':
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     RecentScores.append(TRecentScore())
   Choice = ''
-  while Choice != 'q':
+  while Choice != 'Q' and Choice != "Quit":
     DisplayMenu()
     Choice = GetMenuChoice()
     if Choice == '1':
