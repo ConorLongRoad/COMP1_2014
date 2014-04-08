@@ -4,7 +4,7 @@
 # developed in the Python 3.2 programming environment
 # version 2 edited 06/03/2014
 
-
+import pdb
 import random
 
 NO_OF_RECENT_SCORES = 3
@@ -130,6 +130,7 @@ def IsNextCardHigher(LastCard, NextCard):
 def GetPlayerName():
   print()
   Good = False
+  pdb.set_trace()
   while not Good:
     PlayerName = input('Please enter your name: ')
     Good = PlayerName.isalpha()
