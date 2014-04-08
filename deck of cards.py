@@ -200,10 +200,14 @@ def PlayGame(Deck, RecentScores):
     Choice = ''
     while (Choice != 'Y') and (Choice != "Yes") and (Choice != 'N') and (Choice != "No"):
       Choice = GetChoiceFromUser()
+    if Choice == "Y" or Choice == "Yes":
+      Choice = True
+    if Choice == "N" or Choice == "No":
+      Choice = False
     DisplayCard(NextCard)
     NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
     Higher = IsNextCardHigher(LastCard, NextCard)
-    if (Higher and Choice == 'y') or (not Higher and Choice == 'n'):
+    if (Higher and Choice == True) or (not Higher and Choice == False):
       DisplayCorrectGuessMessage(NoOfCardsTurnedOver - 1)
       LastCard.Rank = NextCard.Rank
       LastCard.Suit = NextCard.Suit
@@ -211,7 +215,9 @@ def PlayGame(Deck, RecentScores):
       GameOver = True
   if GameOver:
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
-    UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
+    Display = input("Would you like your score to be on the leaderboard (y)? ")
+    if Display.capitalize() == "Y" or Display.capitalize() == "Yes":
+      UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
   else:
     DisplayEndOfGameMessage(51)
     UpdateRecentScores(RecentScores, 51)
