@@ -176,12 +176,10 @@ def DisplayRecentScores(RecentScores):
 
 def GetCurrentDate():
   DateNow = datetime.datetime.now()
-  Current_Hour = DateNow.hour
-  Current_Minute = DateNow.minute
   Current_Day = DateNow.day
   Current_Month = DateNow.month
   Current_Year = DateNow.year
-  Current_Time = "{0}:{1} {2}/{3}/{4}".format(Current_Hour,Current_Minute, Current_Day, Current_Month, Current_Year)
+  Current_Time = "{0}/{1}/{2}".format(Current_Day, Current_Month, Current_Year)
   return Current_Time
 
 def UpdateRecentScores(RecentScores, Score, Date):
