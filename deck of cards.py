@@ -256,3 +256,57 @@ if __name__ == '__main__':
       DisplayRecentScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
+
+#Deck of Cards Questions:
+
+
+#Task 3a:
+
+#Question 1:
+#Which function is responsible for getting the name from the user?
+
+#GetPlayerName()
+
+#Question 2:
+#How will you ensure that the user is asked for the name repeatedly?
+
+#By adding a while loop so that it ensures that the user enters anything but "".
+#Also, by using the .isalpha, it ensures that the user is entering letters and not
+#just a load of spaces
+
+#Question 3:
+#What additional variable will you need and what will its datatype be?
+
+#.isalpha will be needed. It's datatype is boolean, so if the variable contains
+#letters, then it will be true, but if there's anything in the varaible that's not
+#letters then it will be false
+
+
+#Task 3b:
+
+#Question 1: Which function is responsible for adding scores to the table?
+#UpdateRecentScores()
+
+
+#Task 5:
+
+#Question 1: What additional module will you need to import into the program?
+#import datetime
+
+#Question 2: Identify the four functions that will require changes.
+#DisplayRecentScores(), where you'd have to bring forth the date and time to output it
+#GetCurrentDate(), which I created to make it just for displaying the time
+#UpdateRecentScores(), which was used to add the date and time to the record
+#PlayGame(), where it would activate all 3 of the above functions and so would need to pass the value through
+
+#Question 3: How do you convert a string in the format DD/MM/YY (e.g. 14/08/93) to a **date** type in Python?
+#I did it by using the datetime.datetime.now() function to get the values of minute/hours/day/month/year/etc,
+#then by naming that list of values individually so you get the values you need from that variable.
+#e.g.
+#DateNow = datetime.datetime.now()
+#Current_Minute = DateNow.minute
+#Current_hour = DateNow.hour
+#Current_day = DateNow.day
+
+#I then brought all these values into 1 variable called Current_Time, by using the .format to format the
+#current date and time into a variable
