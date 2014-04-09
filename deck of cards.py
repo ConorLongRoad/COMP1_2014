@@ -6,6 +6,7 @@
 
 import pdb
 import random
+import datetime
 
 NO_OF_RECENT_SCORES = 3
 
@@ -18,6 +19,7 @@ class TRecentScore():
   def __init__(self):
     self.Name = ''
     self.Score = 0
+    self.Date = ""
 
 Deck = [None]
 RecentScores = [None]
@@ -164,15 +166,25 @@ def DisplayRecentScores(RecentScores):
   print()
   print('Recent Scores: ')
   print()
-  print("Name:           Score:")
+  print("Name:           Score:            Date:")
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    print("{0:<10} {1:>10}".format(RecentScores[Count].Name, RecentScores[Count].Score))
+    print("{0:10} {1:>10} {2:>17}".format(RecentScores[Count].Name, RecentScores[Count].Score, RecentScores[Count].Date))
   print()
   print('Press the Enter key to return to the main menu')
   input()
   print()
 
-def UpdateRecentScores(RecentScores, Score):
+def GetCurrentDate():
+  DateNow = datetime.datetime.now()
+  Current_Hour = DateNow.hour
+  Current_Minute = DateNow.minute
+  Current_Day = DateNow.day
+  Current_Month = DateNow.month
+  Current_Year = DateNow.year
+  Current_Time = "{0}:{1} {2}/{3}/{4}".format(Current_Hour,Current_Minute, Current_Day, Current_Month, Current_Year)
+  return Current_Time
+
+def UpdateRecentScores(RecentScores, Score, Date):
   PlayerName = GetPlayerName()
   FoundSpace = False
   Count = 1
@@ -185,9 +197,11 @@ def UpdateRecentScores(RecentScores, Score):
     for Count in range(1, NO_OF_RECENT_SCORES):
       RecentScores[Count].Name = RecentScores[Count + 1].Name
       RecentScores[Count].Score = RecentScores[Count + 1].Score
+      RecentScores[Count].Date = RecentScores[Count + 1].Date
     Count = NO_OF_RECENT_SCORES
   RecentScores[Count].Name = PlayerName
   RecentScores[Count].Score = Score
+  RecentScores[Count].Date = Date
 
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
@@ -218,7 +232,8 @@ def PlayGame(Deck, RecentScores):
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
     Display = input("Would you like your score to be on the leaderboard (y)? ")
     if Display.capitalize() == "Y" or Display.capitalize() == "Yes":
-      UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
+      Date = GetCurrentDate()
+      UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2, Date)
   else:
     DisplayEndOfGameMessage(51)
     UpdateRecentScores(RecentScores, 51)
