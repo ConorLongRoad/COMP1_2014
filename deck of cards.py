@@ -310,3 +310,34 @@ if __name__ == '__main__':
 
 #I then brought all these values into 1 variable called Current_Time, by using the .format to format the
 #current date and time into a variable
+
+
+# Additional tasks:
+
+#Question 1: Describe each variable role in your own words
+
+#Fixed value - A variable that is created, but cannot be altered or changed. This can be useful for
+#remembering the number of variable elements in use
+
+#Stepper - A counter that goes through a for loop and counts the number of itterations that proceed
+#during the process
+
+#Most Recent Holder - The most recent itteration of a variable, for example a running total, where the
+#total is constantly changing and being added to
+
+#Most Wanted Holder - The variable needed the most to complete the task set (e.g. having a while loop
+#through a set of integers, and if the value needed to end the loop is over 30, then the most wanted
+#holder will be 33 or 49, or anything above 30
+
+#Gatherer - A variable that accepts all the individual values to end up with a running total at the end
+#(e.g. adding up numbers. Or even adding up strings so you get a long string at the end)
+
+#Transformation - A variable that uses the same calculation for each variable, but will use different
+#variables to work out a final answer (e.g. finding the mean of a set of numbers. It will work the
+#same way but because you're using different numbers, the total is different
+
+#Follower - A variable that gets its new value from the old value of another variable, if you need to
+#save that original value (e.g. a=2, b=a+2, c=b+a, etc)
+
+#Temporary - A variable that only uses a value for a short period of time, such as a bubble sort, where
+#you need to temporarly use that value
