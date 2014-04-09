@@ -341,3 +341,12 @@ if __name__ == '__main__':
 
 #Temporary - A variable that only uses a value for a short period of time, such as a bubble sort, where
 #you need to temporarly use that value
+
+
+#Question 2: Give an example of variable from the program code for each variable role.
+
+#Question 1: Describe the difference between passing by value and passing by reference in your own words
+
+#Passing by reference is passing the location of that data on, whereas passing the value is only passing
+#what already exists. Passing the reference is going directly to the value, whereas passing the value is
+#similar to copying the value onto another variable location
