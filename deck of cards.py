@@ -75,6 +75,7 @@ def DisplayMenu():
   print('2. Play game (without shuffle)')
   print('3. Display recent scores')
   print('4. Reset recent scores')
+  print("5. Options")
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
@@ -201,6 +202,40 @@ def UpdateRecentScores(RecentScores, Score, Date):
   RecentScores[Count].Score = Score
   RecentScores[Count].Date = Date
 
+def DisplayOptions():
+  print()
+  print("Here are the options: ")
+  print()
+  print("1. Set Ace to High or Low")
+  print("2. ")
+  print("3. ")
+  print()
+
+def GetOptionChoice():
+  Number = False
+  print("Please enter the option that you'd like to enter (1-5): ")
+  while not Number:
+    Option = int(input())
+    if Option > 0 and Option < 5:
+      return Option
+
+def SetOptionChoice(Option):
+  if Option == 1:
+    SetAceHighOrLow()
+
+def SetAceHighOrLow():
+  Done = False
+  print()
+  print("Please enter whether you'd like to have the ace be (H)igh or (L)ow: ")
+  while not Done:
+    Choice = input()
+    if Choice.capitalize() == "H" or Choice.capitalize() == "High":
+      return "H"
+    elif Choice.capitalize() == "L" or Choice.captialize() == "Low":
+      return "L"
+    else:
+      print("That is not a valid entry. Please try again")
+  
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
   NextCard = TCard()
@@ -256,6 +291,10 @@ if __name__ == '__main__':
       DisplayRecentScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
+    elif Choice == "5":
+      DisplayOptions()
+      OptionChoice = GetOptionChoice()
+      SetOptionChoice(OptionChoice)
 
 #Deck of Cards Questions:
 
