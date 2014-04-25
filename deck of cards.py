@@ -53,6 +53,8 @@ def GetRank(RankNo):
     Rank = 'Queen'
   elif RankNo == 13:
     Rank = 'King'
+  elif RankNo == 14:
+    Rank = "Ace"
   return Rank
 
 def GetSuit(SuitNo):
@@ -115,8 +117,10 @@ def DisplayCard(ThisCard):
   print('Card is the', GetRank(ThisCard.Rank), 'of', GetSuit(ThisCard.Suit))
   print()
 
-def GetCard(ThisCard, Deck, NoOfCardsTurnedOver):
+def GetCard(ThisCard, Deck, NoOfCardsTurnedOver, High):
   ThisCard.Rank = Deck[1].Rank
+  if ThisCard.Rank == 1 and High == True:
+    ThisCard.Rank = 14
   ThisCard.Suit = Deck[1].Suit
   for Count in range(1, 52 - NoOfCardsTurnedOver):
     Deck[Count].Rank = Deck[Count + 1].Rank
@@ -221,7 +225,7 @@ def GetOptionChoice():
 
 def SetOptionChoice(Option):
   if Option == 1:
-    SetAceHighOrLow()
+    High = SetAceHighOrLow()
 
 def SetAceHighOrLow():
   Done = False
@@ -230,17 +234,20 @@ def SetAceHighOrLow():
   while not Done:
     Choice = input()
     if Choice.capitalize() == "H" or Choice.capitalize() == "High":
-      return "H"
+      print("You have chosen to make ace HIGH")
+      Done = True
+      return Done
     elif Choice.capitalize() == "L" or Choice.captialize() == "Low":
-      return "L"
+      print("You have chosen to make ace LOW")
+      return Done
     else:
       print("That is not a valid entry. Please try again")
-  
+
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
   NextCard = TCard()
   GameOver = False
-  GetCard(LastCard, Deck, 0)
+  GetCard(LastCard, Deck, 0, High)
   DisplayCard(LastCard)
   NoOfCardsTurnedOver = 1
   while (NoOfCardsTurnedOver < 52) and (not GameOver):
@@ -272,6 +279,7 @@ def PlayGame(Deck, RecentScores):
     UpdateRecentScores(RecentScores, 51)
 
 if __name__ == '__main__':
+  High = False
   for Count in range(1, 53):
     Deck.append(TCard())
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
@@ -283,10 +291,10 @@ if __name__ == '__main__':
     if Choice == '1':
       LoadDeck(Deck)
       ShuffleDeck(Deck)
-      PlayGame(Deck, RecentScores)
+      PlayGame(Deck, RecentScores, High)
     elif Choice == '2':
       LoadDeck(Deck)
-      PlayGame(Deck, RecentScores)
+      PlayGame(Deck, RecentScores, High)
     elif Choice == '3':
       DisplayRecentScores(RecentScores)
     elif Choice == '4':
@@ -294,7 +302,7 @@ if __name__ == '__main__':
     elif Choice == "5":
       DisplayOptions()
       OptionChoice = GetOptionChoice()
-      SetOptionChoice(OptionChoice)
+      High = SetOptionChoice(OptionChoice)
 
 #Deck of Cards Questions:
 
