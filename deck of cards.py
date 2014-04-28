@@ -98,7 +98,7 @@ def LoadDeck(Deck):
     LineFromFile = CurrentFile.readline()
     Deck[Count].Rank = int(LineFromFile)
     Count = Count + 1
- 
+
 def ShuffleDeck(Deck):
   SwapSpace = TCard()
   NoOfSwaps = 1000
@@ -117,7 +117,7 @@ def DisplayCard(ThisCard):
   print('Card is the', GetRank(ThisCard.Rank), 'of', GetSuit(ThisCard.Suit))
   print()
 
-def GetCard(ThisCard, Deck, NoOfCardsTurnedOver, High):
+def GetCard(ThisCard, Deck, NoOfCardsTurnedOver):
   ThisCard.Rank = Deck[1].Rank
   if ThisCard.Rank == 1 and High == True:
     ThisCard.Rank = 14
@@ -128,8 +128,10 @@ def GetCard(ThisCard, Deck, NoOfCardsTurnedOver, High):
   Deck[52 - NoOfCardsTurnedOver].Suit = 0
   Deck[52 - NoOfCardsTurnedOver].Rank = 0
 
-def IsNextCardHigher(LastCard, NextCard):
+def IsNextCardHigher(LastCard, NextCard, High):
   Higher = False
+  if High == True and LastCard.Rank == 1:
+    NextCard.Rank = 15
   if NextCard.Rank > LastCard.Rank:
     Higher = True
   return Higher
@@ -137,7 +139,6 @@ def IsNextCardHigher(LastCard, NextCard):
 def GetPlayerName():
   print()
   Good = False
-  pdb.set_trace()
   while not Good:
     PlayerName = input('Please enter your name: ')
     Good = PlayerName.isalpha()
@@ -226,6 +227,7 @@ def GetOptionChoice():
 def SetOptionChoice(Option):
   if Option == 1:
     High = SetAceHighOrLow()
+    return High
 
 def SetAceHighOrLow():
   Done = False
@@ -243,11 +245,11 @@ def SetAceHighOrLow():
     else:
       print("That is not a valid entry. Please try again")
 
-def PlayGame(Deck, RecentScores):
+def PlayGame(Deck, RecentScores, High):
   LastCard = TCard()
   NextCard = TCard()
   GameOver = False
-  GetCard(LastCard, Deck, 0, High)
+  GetCard(LastCard, Deck, 0)
   DisplayCard(LastCard)
   NoOfCardsTurnedOver = 1
   while (NoOfCardsTurnedOver < 52) and (not GameOver):
@@ -261,7 +263,7 @@ def PlayGame(Deck, RecentScores):
       Choice = False
     DisplayCard(NextCard)
     NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
-    Higher = IsNextCardHigher(LastCard, NextCard)
+    Higher = IsNextCardHigher(LastCard, NextCard, High)
     if (Higher and Choice == True) or (not Higher and Choice == False):
       DisplayCorrectGuessMessage(NoOfCardsTurnedOver - 1)
       LastCard.Rank = NextCard.Rank
