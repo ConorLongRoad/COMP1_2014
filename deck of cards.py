@@ -7,6 +7,7 @@
 import pdb
 import random
 import datetime
+import pickle
 
 NO_OF_RECENT_SCORES = 3
 
@@ -76,6 +77,8 @@ def DisplayMenu():
   print('3. Display recent scores')
   print('4. Reset recent scores')
   print("5. Options")
+  print("6. Save high scores")
+  print("7. Load high scores")
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
@@ -178,6 +181,21 @@ def DisplayRecentScores(RecentScores):
   input()
   print()
 
+def BubbleSortScores(RecentScores):
+  print()
+  print("Sorting out scores")
+  print()
+  moreSwaps = False
+  while moreSwaps:
+    moreSwaps = False
+    for count in range(len(RecentScores)-1):
+      if RecentScores[count] > RecentScores[count+1]:
+        moreSwaps = True
+        temp = RecentScores[count]
+        RecentScores[count] = RecentScores[count+1]
+        RecentScores[count+1] = temp
+  return RecentScores
+
 def GetCurrentDate():
   DateNow = datetime.datetime.now()
   Current_Day = DateNow.day
@@ -243,6 +261,17 @@ def SetAceHighOrLow():
     else:
       print("That is not a valid entry. Please try again")
 
+def SaveScores(RecentScores):
+  with open("HighScores.dat",mode="wb") as myFile:
+    for Scores in RecentScores:
+      pickle.dump(Scores,myFile)
+
+def LoadScores():
+  pdb.set_trace()
+  with open("HighScores.dat",mode="rb") as myFile:
+    for count in myFile:
+      RecentScores = pickle.load(count,myFile)
+
 def PlayGame(Deck, RecentScores, High):
   LastCard = TCard()
   NextCard = TCard()
@@ -296,6 +325,7 @@ if __name__ == '__main__':
       LoadDeck(Deck)
       PlayGame(Deck, RecentScores, High)
     elif Choice == '3':
+      BubbleSortScores(RecentScores)
       DisplayRecentScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
@@ -303,6 +333,10 @@ if __name__ == '__main__':
       DisplayOptions()
       OptionChoice = GetOptionChoice()
       High = SetOptionChoice(OptionChoice)
+    elif Choice == "6":
+      SaveScores(RecentScores)
+    elif Choice == "7":
+      RecentScores = LoadScores()
 
 #Deck of Cards Questions:
 
