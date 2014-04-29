@@ -27,7 +27,7 @@ Choice = ''
 
 def GetRank(RankNo):
   Rank = ''
-  if RankNo == 1:
+  if RankNo == 1 or RankNo == 14:
     Rank = 'Ace'
   elif RankNo == 2:
     Rank = 'Two'
@@ -53,8 +53,6 @@ def GetRank(RankNo):
     Rank = 'Queen'
   elif RankNo == 13:
     Rank = 'King'
-  elif RankNo == 14:
-    Rank = "Ace"
   return Rank
 
 def GetSuit(SuitNo):
