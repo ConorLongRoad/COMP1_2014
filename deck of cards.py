@@ -188,8 +188,9 @@ def BubbleSortScores(RecentScores):
   moreSwaps = False
   while moreSwaps:
     moreSwaps = False
-    for count in range(len(RecentScores)-1):
-      if RecentScores[count] > RecentScores[count+1]:
+    pdb.set_trace()
+    for count in range(1, NO_OF_RECENT_SCORES + 1):
+      if RecentScores[count].Score < RecentScores[count+1].Score:
         moreSwaps = True
         temp = RecentScores[count]
         RecentScores[count] = RecentScores[count+1]
