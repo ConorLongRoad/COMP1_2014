@@ -182,20 +182,24 @@ def DisplayRecentScores(RecentScores):
   print()
 
 def BubbleSortScores(RecentScores):
+  for step in range(1,len(RecentScores)):
+    print("{0}".format(RecentScores[step].Name))
   print()
   print("Sorting out scores")
   print()
-  moreSwaps = False
+  moreSwaps = True
   while moreSwaps:
     moreSwaps = False
-    pdb.set_trace()
-    for count in range(1, NO_OF_RECENT_SCORES + 1):
+    for count in range(1, NO_OF_RECENT_SCORES):
       if RecentScores[count].Score < RecentScores[count+1].Score:
         moreSwaps = True
         temp = RecentScores[count]
         RecentScores[count] = RecentScores[count+1]
         RecentScores[count+1] = temp
-  return RecentScores
+        print(RecentScores[1].Name)
+        print(RecentScores[2].Name)
+        print(RecentScores[3].Name)
+        print()
 
 def GetCurrentDate():
   DateNow = datetime.datetime.now()
