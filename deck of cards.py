@@ -266,15 +266,20 @@ def SetAceHighOrLow():
     else:
       print("That is not a valid entry. Please try again")
 
+#-------------------------------------------------------
 def SaveScores(RecentScores):
-  with open("HighScores.dat",mode="wb") as myFile:
-    for Scores in RecentScores:
-      pickle.dump(Scores,myFile)
+  pdb.set_trace()
+  with open("HighScores.txt",mode="a",encoding="utf-8") as myFile:
+    for counter in range(1,NO_OF_RECENT_SCORES):
+      myFile.write(RecentScores.Name[counter])
+      myFile.write(RecentScores.Score[counter])
+      myFile.write(RecentScores.Date[counter]+"\n")
+#-------------------------------------------------------
 
 def LoadScores():
   pdb.set_trace()
-  with open("HighScores.dat",mode="rb") as myFile:
-    for count in myFile:
+  with open("HighScores.txt",mode="r",encoding="utf-8") as myFile:
+    for Scores in myFile:
       RecentScores = pickle.load(count,myFile)
 
 def PlayGame(Deck, RecentScores, High):
@@ -308,6 +313,7 @@ def PlayGame(Deck, RecentScores, High):
     if Display.capitalize() == "Y" or Display.capitalize() == "Yes":
       Date = GetCurrentDate()
       UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2, Date)
+      BubbleSortScores(RecentScores)
   else:
     DisplayEndOfGameMessage(51)
     UpdateRecentScores(RecentScores, 51)
@@ -330,7 +336,6 @@ if __name__ == '__main__':
       LoadDeck(Deck)
       PlayGame(Deck, RecentScores, High)
     elif Choice == '3':
-      BubbleSortScores(RecentScores)
       DisplayRecentScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
