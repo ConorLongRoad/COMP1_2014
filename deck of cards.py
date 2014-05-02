@@ -7,7 +7,6 @@
 import pdb
 import random
 import datetime
-import pickle
 
 NO_OF_RECENT_SCORES = 3
 
@@ -132,7 +131,7 @@ def GetCard(ThisCard, Deck, NoOfCardsTurnedOver):
 def IsNextCardHigher(LastCard, NextCard, High):
   Higher = False
   if High == True and LastCard.Rank == 1:
-    NextCard.Rank = 15
+    NextCard.Rank = 14
   if NextCard.Rank > LastCard.Rank:
     Higher = True
   return Higher
@@ -235,6 +234,8 @@ def DisplayOptions():
   print("1. Set Ace to High or Low")
   print("2. ")
   print("3. ")
+  print("4. ")
+  print("5. ")
   print()
 
 def GetOptionChoice():
@@ -266,21 +267,31 @@ def SetAceHighOrLow():
     else:
       print("That is not a valid entry. Please try again")
 
-#-------------------------------------------------------
 def SaveScores(RecentScores):
-  pdb.set_trace()
-  with open("HighScores.txt",mode="a",encoding="utf-8") as myFile:
-    for counter in range(1,NO_OF_RECENT_SCORES):
-      myFile.write(RecentScores.Name[counter])
-      myFile.write(RecentScores.Score[counter])
-      myFile.write(RecentScores.Date[counter]+"\n")
-#-------------------------------------------------------
+  with open("HighScores.txt",mode="w",encoding="utf-8") as myFile:
+    for count in range(1, NO_OF_RECENT_SCORES + 1):
+      myFile.write(RecentScores[count].Name+"\n")
+      myFile.write(str(RecentScores[count].Score)+"\n")
+      myFile.write(RecentScores[count].Date+"\n")
+    print()
+    print("Your highscores have been sent through to the text file HighScores.txt")
 
 def LoadScores():
-  pdb.set_trace()
-  with open("HighScores.txt",mode="r",encoding="utf-8") as myFile:
-    for Scores in myFile:
-      RecentScores = pickle.load(count,myFile)
+  with open("HighScores.txt", mode = "r", encoding = "utf-8") as myFile:
+    count = 1
+    pdb.set_trace()
+    while True:
+      LineFromFile = myFile.readline()
+      if not LineFromFile:
+        myFile.close()
+        break
+      RecentScores[count].Name = str(myFile)
+      LineFromFile = myFile.readline()
+      RecentScores[count].Score = myFile
+      LineFromFile = myFile.readline()
+      RecentScores[count].Date = str(myFile)
+      count = count + 1
+      
 
 def PlayGame(Deck, RecentScores, High):
   LastCard = TCard()
@@ -311,7 +322,7 @@ def PlayGame(Deck, RecentScores, High):
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
     Display = input("Would you like your score to be on the leaderboard (y)? ")
     if Display.capitalize() == "Y" or Display.capitalize() == "Yes":
-      Date = GetCurrentDate()
+      Date = GetCurrentDate() 
       UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2, Date)
       BubbleSortScores(RecentScores)
   else:
