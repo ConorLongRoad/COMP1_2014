@@ -274,7 +274,7 @@ def SaveScores(RecentScores):
   with open("HighScores.txt",mode="w",encoding="utf-8") as myFile:
     for count in range(1, NO_OF_RECENT_SCORES + 1):
       myFile.write(RecentScores[count].Name+"\n")
-      myFile.write(str(RecentScores[count].Score)+"\n")
+      myFile.write(str(RecentScores[count].Score+"\n"))
       myFile.write(RecentScores[count].Date+"\n")
     print()
     print("Your highscores have been sent through to the text file HighScores.txt")
@@ -294,7 +294,7 @@ def LoadScores():
       LineFromFile = myFile.readline()
       RecentScores[count].Date = str(LineFromFile)
       count = count + 1
-      
+    print("Your files have loaded from the text file")
 
 def PlayGame(Deck, RecentScores, High):
   LastCard = TCard()
