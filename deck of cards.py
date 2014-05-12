@@ -173,8 +173,11 @@ def DisplayRecentScores(RecentScores):
   print('Recent Scores: ')
   print()
   print("Name:           Score:            Date:")
+  pdb.set_trace()
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    print("{0:10} {1:>10} {2:>17}".format(RecentScores[Count].Name, RecentScores[Count].Score, RecentScores[Count].Date))
+    print("{0:<6}".format(RecentScores[Count].Name))
+    print("{0:<3}".format(RecentScores[Count].Score))
+    print("{0:<10}".format(RecentScores[Count].Date))
   print()
   print('Press the Enter key to return to the main menu')
   input()
@@ -278,18 +281,18 @@ def SaveScores(RecentScores):
 
 def LoadScores():
   with open("HighScores.txt", mode = "r", encoding = "utf-8") as myFile:
+    #pdb.set_trace()
     count = 1
-    pdb.set_trace()
     while True:
       LineFromFile = myFile.readline()
       if not LineFromFile:
         myFile.close()
         break
-      RecentScores[count].Name = str(myFile)
+      RecentScores[count].Name = str(LineFromFile)
       LineFromFile = myFile.readline()
-      RecentScores[count].Score = myFile
+      RecentScores[count].Score = LineFromFile
       LineFromFile = myFile.readline()
-      RecentScores[count].Date = str(myFile)
+      RecentScores[count].Date = str(LineFromFile)
       count = count + 1
       
 
@@ -357,7 +360,7 @@ if __name__ == '__main__':
     elif Choice == "6":
       SaveScores(RecentScores)
     elif Choice == "7":
-      RecentScores = LoadScores()
+      LoadScores()
 
 #Deck of Cards Questions:
 
