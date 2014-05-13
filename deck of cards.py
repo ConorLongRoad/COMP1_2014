@@ -8,7 +8,7 @@ import pdb
 import random
 import datetime
 
-NO_OF_RECENT_SCORES = 3
+NO_OF_RECENT_SCORES = 10
 
 class TCard():
   def __init__(self):
@@ -173,11 +173,9 @@ def DisplayRecentScores(RecentScores):
   print('Recent Scores: ')
   print()
   print("Name:           Score:            Date:")
-  pdb.set_trace()
+  #pdb.set_trace()
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    print("{0:<6}".format(RecentScores[Count].Name))
-    print("{0:<3}".format(RecentScores[Count].Score))
-    print("{0:<10}".format(RecentScores[Count].Date))
+    print("{0:<6}{1:>11}{2:>26}".format(RecentScores[Count].Name,RecentScores[Count].Score,RecentScores[Count].Date))
   print()
   print('Press the Enter key to return to the main menu')
   input()
@@ -272,9 +270,11 @@ def SetAceHighOrLow():
 
 def SaveScores(RecentScores):
   with open("HighScores.txt",mode="w",encoding="utf-8") as myFile:
-    for count in range(1, NO_OF_RECENT_SCORES + 1):
+    pdb.set_trace()
+    for count in range(1, len(RecentScores)):
+      RecentScores[count].Score = str(RecentScores[count].Score)
       myFile.write(RecentScores[count].Name+"\n")
-      myFile.write(str(RecentScores[count].Score+"\n"))
+      myFile.write(RecentScores[count].Score+"\n")
       myFile.write(RecentScores[count].Date+"\n")
     print()
     print("Your highscores have been sent through to the text file HighScores.txt")
