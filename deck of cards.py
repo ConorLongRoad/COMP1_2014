@@ -172,21 +172,16 @@ def DisplayRecentScores(RecentScores):
   print()
   print('Recent Scores: ')
   print()
-  print("Name:           Score:            Date:")
+  print("{0:<15}|{1:<8}|{2:<8}".format("Name:","Score:","Date:"))
   #pdb.set_trace()
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    print("{0:<6}{1:>11}{2:>26}".format(RecentScores[Count].Name,RecentScores[Count].Score,RecentScores[Count].Date))
+    print("{0:<15}|{1:<8}|{2:<8}".format(RecentScores[Count].Name,RecentScores[Count].Score,RecentScores[Count].Date))
   print()
   print('Press the Enter key to return to the main menu')
   input()
-  print()
 
 def BubbleSortScores(RecentScores):
-  for step in range(1,len(RecentScores)):
-    print("{0}".format(RecentScores[step].Name))
-  print()
   print("Sorting out scores")
-  print()
   moreSwaps = True
   while moreSwaps:
     moreSwaps = False
@@ -196,10 +191,6 @@ def BubbleSortScores(RecentScores):
         temp = RecentScores[count]
         RecentScores[count] = RecentScores[count+1]
         RecentScores[count+1] = temp
-        print(RecentScores[1].Name)
-        print(RecentScores[2].Name)
-        print(RecentScores[3].Name)
-        print()
 
 def GetCurrentDate():
   DateNow = datetime.datetime.now()
@@ -273,26 +264,20 @@ def SaveScores(RecentScores):
     pdb.set_trace()
     for count in range(1, len(RecentScores)):
       RecentScores[count].Score = str(RecentScores[count].Score)
-      myFile.write(RecentScores[count].Name+"\n")
-      myFile.write(RecentScores[count].Score+"\n")
-      myFile.write(RecentScores[count].Date+"\n")
+      myFile.write("{0:<15}|{1:<8}|{2:<8}".format(RecentScores[count].Name,RecentScores[count].Score,RecentScores[count].Date)+"\n")
     print()
     print("Your highscores have been sent through to the text file HighScores.txt")
 
 def LoadScores():
   with open("HighScores.txt", mode = "r", encoding = "utf-8") as myFile:
-    #pdb.set_trace()
+    pdb.set_trace()
     count = 1
     while True:
       LineFromFile = myFile.readline()
       if not LineFromFile:
         myFile.close()
         break
-      RecentScores[count].Name = str(LineFromFile)
-      LineFromFile = myFile.readline()
-      RecentScores[count].Score = LineFromFile
-      LineFromFile = myFile.readline()
-      RecentScores[count].Date = str(LineFromFile)
+      RecentScores[count].Name = LineFromFile
       count = count + 1
     print("Your files have loaded from the text file")
 
@@ -324,6 +309,7 @@ def PlayGame(Deck, RecentScores, High):
   if GameOver:
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
     Display = input("Would you like your score to be on the leaderboard (y)? ")
+    pdb.set_trace()
     if Display.capitalize() == "Y" or Display.capitalize() == "Yes":
       Date = GetCurrentDate() 
       UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2, Date)
