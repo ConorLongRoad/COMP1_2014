@@ -1,4 +1,5 @@
 import sys
+import random
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -77,7 +78,9 @@ class crop_window(QMainWindow):
         #Create a widget to display the grow layout
         self.viewCropWidget = QWidget()
         self.viewCropWidget.setLayout(self.growGrid)
-        
+
+        #Connections
+        self.automaticGrowButton.clicked.connect(self.automaticallyGrowCrop)
 
     def instantiateCrop(self):
         cropType = self.cropRadioButtons.selectedButton() #Get the radio that was clicked
@@ -91,6 +94,11 @@ class crop_window(QMainWindow):
         self.stackedLayout.addWidget(self.viewCropWidget) #Add this to the stack
         self.stackedLayout.setCurrentIndex(1) #Change the visible layout in the stack
         
+    def automaticallyGrowCrop(self):
+        for days in range(30):
+            light = random.randint(1,10)
+            water = random.randint(1,10)
+            self.simulatedCropGrow(light, water)
         
 def main():
     cropSimulation = QApplication(sys.argv) #Creatre new application
