@@ -77,6 +77,7 @@ class crop_window(QMainWindow):
         #Create a widget to display the grow layout
         self.viewCropWidget = QWidget()
         self.viewCropWidget.setLayout(self.growGrid)
+        
 
     def instantiateCrop(self):
         cropType = self.cropRadioButtons.selectedButton() #Get the radio that was clicked
