@@ -16,6 +16,14 @@ class crop_window(QMainWindow):
         self.setWindowTitle("Crop Simulator") #Set window title
         self.createSelectCropLayout()
 
+        self.stackedLayout = QStackedLayout() #This holds the various layout that this layout needs
+        self.stackedLayout.addWidget(self.selectCropWidget)
+
+        #Set the central widget to display the layout
+        self.centralWidget = QWidget()
+        self.centralWidget.setLayout(self.stackedLayout)
+        self.setCentralWidget(self.centralWidget)
+
     def createSelectCropLayout(self):
         #This is the initial layout of the window - to select the crop type
 
@@ -77,7 +85,11 @@ class crop_window(QMainWindow):
             self.simulatedCrop = Wheat()
         elif cropType == 2:
             self.simulatedCrop = Potato()
-        print(self.simulatedCrop)
+
+        self.createViewCropLayout(cropType) #Create the view crop growth layout
+        self.stackedLayout.addWidget(self.viewCropWidget) #Add this to the stack
+        self.stackedLayout.setCurrentIndex(1) #Change the visible layout in the stack
+        
         
 def main():
     cropSimulation = QApplication(sys.argv) #Creatre new application
