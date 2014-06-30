@@ -35,6 +35,41 @@ class crop_window(QMainWindow):
         #Connections
         self.instantiateButton.clicked.connect(self.instantiateCrop)
 
+    def createViewCropLayout(self, cropType):
+        #This is the second layout of the window - view the crop growth
+        self.growthLabel = QLabel("Growth")
+        self.daysLabel = QLabel("Days Growing")
+        self.statusLabel = QLabel("Status")
+
+        self.growthLineEdit = QLineEdit()
+        self.daysLineEdit = QLineEdit()
+        self.statusLineEdit = QLineEdit()
+
+        self.manualGrowButton = QPushButton("Manually Grow")
+        self.automaticGrowButton = QPushButton("Automatically Grow")
+
+        self.growGrid = QGridLayout()
+        self.statusGrid = QGridLayout()
+
+        #Add label widgets to the status layout
+        self.statusGrid.addWidget(self.growthLabel, 0, 0)
+        self.statusGrid.addWidget(self.daysLabel, 1, 0)
+        self.statusGrid.addWidget(self.statusLabel, 2, 0)
+
+        #Add line edit widgets to the status layout
+        self.statusGrid.addWidget(self.growthLineEdit, 0, 1)
+        self.statusGrid.addWidget(self.daysLineEdit, 1, 1)
+        self.statusGrid.addWidget(self.statusLineEdit, 2, 1)
+
+        #Add widgets/layouts to the grow layout
+        self.growGrid.addLayout(self.statusGrid, 0, 1)
+        self.growGrid.addWidget(self.manualGrowButton, 1, 0)
+        self.growGrid.addWidget(self.automaticGrowButton, 1, 1)
+
+        #Create a widget to display the grow layout
+        self.viewCropWidget = QWidget()
+        self.viewCropWidget.setLayout(self.growGrid)
+
     def instantiateCrop(self):
         cropType = self.cropRadioButtons.selectedButton() #Get the radio that was clicked
 
