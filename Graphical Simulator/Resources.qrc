@@ -1,0 +1,14 @@
+<!DOCTYPE RCC><RCC version="1.0">
+	<qresource>
+		<file alias="Wheat_Seed.png">images/wheat/Seed.png</file>
+		<file alias="Wheat_Seedling.png">images/wheat/seedling.png</file>
+		<file alias="Wheat_Young.png">images/wheat/Young.png</file>
+		<file alias="Wheat_Mature.png">images/wheat/Mature.png</file>
+		<file alias="Wheat_Old.png">images/wheat/Old.png</file>
+		<file alias="Potato_Seed.png">images/potato/Seed.png</file>
+		<file alias="Potato_Seedling.png">images/potato/Seedling.png</file>
+		<file alias="Potato_Young.png">images/potato/Young.png</file>
+		<file alias="Potato_Mature.png">images/potato/Mature.png</file>
+		<file alias="Potato_Old.png">images/potato/Old.png</file>
+	</qresource>
+</RCC>
